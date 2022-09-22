@@ -1,7 +1,7 @@
 import User from "../models/User";
 import Video from "../models/Video";
 import fetch from "node-fetch";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
 export const postJoin = async (req, res) => {
@@ -51,7 +51,7 @@ export const postLogin = async (req, res) => {
       errorMessage: "An account with this name does not exist.",
     });
   }
-  const ok = await bcrypt.compare(password, user.password);
+  const ok = await bcryptjs.compare(password, user.password);
   if (!ok) {
     return res.status(400).render("login", {
       pageTitle,
@@ -187,7 +187,7 @@ export const postChangePassword = async (req, res) => {
     body: { oldPassword, newPassword, newPasswordConfirmation },
   } = req;
   const user = await User.findById(_id);
-  const ok = await bcrypt.compare(oldPassword, user.password);
+  const ok = await bcryptjs.compare(oldPassword, user.password);
   if (!ok) {
     return res.status(400).render("users/change-password", {
       pageTitle: "Change Password",
