@@ -21,10 +21,11 @@ header
                         else if loggedInUser.avatarUrl[0]==="h"
                             img.header__avatar(src= loggedInUser.avatarUrl)
                         else
-                            if loggedInUser.avatarUrl.includes("github")
-                                img.header__avatar(src=loggedInUser.avatarUrl)
-                            else 
-                                img.header__avatar(src= "/"+loggedInUser.avatarUrl)
+                            if loggedInUser.avatarUrl
+                                if loggedInUser.avatarUrl.includes("github")
+                                    img.header__avatar(src=loggedInUser.avatarUrl, crossorigin)
+                                else 
+                                    img.header__avatar(src=loggedInUser.avatarUrl, crossorigin)
 
             else
                 li
